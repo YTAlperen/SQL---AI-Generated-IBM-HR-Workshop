@@ -296,7 +296,22 @@ ORDER BY ayrilma_orani DESC
 ### S15 · İş seviyesine göre maaş çeyrekleri ve ayrılma oranı (`NTILE`)
 
 ```sql
+WITH quarterCTE AS(
+SELECT hr.EmployeeNumber, hr.JobLevel, hr.MonthlyIncome, hr.Attrition,
+NTILE(4) OVER(
+  PARTITION BY hr.JobLevel ORDER BY hr.MonthlyIncome
+) AS quarter
+FROM `sql-practise-491318.IBM.IBM_HR` AS hr
+)
 
+SELECT JobLevel, quarter, COUNT(EmployeeNumber)AS count_of_employees,
+MIN(MonthlyIncome)AS min_monthlyincome,
+MAX(MonthlyIncome)AS max_monthlyincome,
+ROUND(AVG(MonthlyIncome),2)AS avg_monthlyincome,
+SUM(CASE WHEN attrition = TRUE THEN 1 ELSE 0 END) AS sum_of_attrition_true,
+  ROUND(100.0 * SUM(CASE WHEN attrition = TRUE THEN 1 ELSE 0 END) / COUNT(*), 2) AS rate_of_attrition
+FROM quarterCTE
+GROUP BY joblevel, quarter
 ```
 
 > 💡 `NTILE(4)` veriyi 4 eşit gruba böler. Burada her `JobLevel` kendi içinde 4'e bölünüyor.
