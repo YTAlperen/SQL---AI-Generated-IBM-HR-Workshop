@@ -321,7 +321,19 @@ GROUP BY joblevel, quarter
 ### S16 · İK Direktörü için Attrition Dashboard (Tek Sorgu)
 
 ```sql
-
+SELECT hr.Department, COUNT(*)AS sum_of_employees, ROUND(AVG(hr.Age),2) AS avg_age,
+ROUND(100.0 * SUM(CASE WHEN attrition = TRUE THEN 1 ELSE 0 END) / COUNT(*), 2) AS rate_of_attrition,
+ROUND(AVG(hr.monthlyincome),2) AS avg_income,
+ROUND(100.0 * SUM(CASE WHEN OverTime = TRUE THEN 1 ELSE 0 END) / COUNT(*), 2) AS rate_of_overtime,
+ROUND(AVG(JobSatisfaction),2) AS rate_of_jobsatisfaction,
+CASE
+    WHEN AVG(JobSatisfaction) >= 3.5 THEN 'Çok Yüksek'
+    WHEN AVG(JobSatisfaction) >= 2.5 THEN 'Yüksek'
+    WHEN AVG(JobSatisfaction) >= 1.5 THEN 'Orta'
+    ELSE 'Düşük'
+END AS job_satisfaction_status
+FROM `sql-practise-491318.IBM.IBM_HR` AS hr
+GROUP BY hr.Department
 ```
 
 ---
