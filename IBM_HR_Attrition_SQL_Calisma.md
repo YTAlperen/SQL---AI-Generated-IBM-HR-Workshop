@@ -314,11 +314,9 @@ FROM quarterCTE
 GROUP BY joblevel, quarter
 ```
 
-> 💡 `NTILE(4)` veriyi 4 eşit gruba böler. Burada her `JobLevel` kendi içinde 4'e bölünüyor.
 
 ---
 
-## 🏆 Bonus — Gerçek Hayat Senaryosu
 
 ### S16 · İK Direktörü için Attrition Dashboard (Tek Sorgu)
 
