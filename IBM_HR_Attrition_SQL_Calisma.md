@@ -1,7 +1,6 @@
-# 🧠 IBM HR Attrition — SQL Çalışma Kitabı
+# 🧠 IBM HR — SQL Çalışma Kitabı
 
 > **Dataset:** IBM tarafından oluşturulan kurgusal İK verisi · **1.470 çalışan · 35 kolon**  
-> **Amaç:** Kolaydan zora SQL pratiği — her bölüm bir öncekinin üzerine inşa edilir.
 
 ---
 
